@@ -33,6 +33,11 @@ API rule violation: list_type_missing,k8s.io/api/apps/v1beta2,DeploymentStatus,C
 API rule violation: list_type_missing,k8s.io/api/apps/v1beta2,ReplicaSetStatus,Conditions
 API rule violation: list_type_missing,k8s.io/api/apps/v1beta2,StatefulSetSpec,VolumeClaimTemplates
 API rule violation: list_type_missing,k8s.io/api/apps/v1beta2,StatefulSetStatus,Conditions
+API rule violation: list_type_missing,k8s.io/api/apps/v2alpha1,DaemonSetStatus,Conditions
+API rule violation: list_type_missing,k8s.io/api/apps/v2alpha1,DeploymentStatus,Conditions
+API rule violation: list_type_missing,k8s.io/api/apps/v2alpha1,ReplicaSetStatus,Conditions
+API rule violation: list_type_missing,k8s.io/api/apps/v2alpha1,StatefulSetSpec,VolumeClaimTemplates
+API rule violation: list_type_missing,k8s.io/api/apps/v2alpha1,StatefulSetStatus,Conditions
 API rule violation: list_type_missing,k8s.io/api/authentication/v1,TokenRequestSpec,Audiences
 API rule violation: list_type_missing,k8s.io/api/authentication/v1,TokenReviewSpec,Audiences
 API rule violation: list_type_missing,k8s.io/api/authentication/v1,TokenReviewStatus,Audiences

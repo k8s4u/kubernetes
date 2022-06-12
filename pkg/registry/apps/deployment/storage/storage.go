@@ -64,9 +64,10 @@ func ReplicasPathMappings() fieldmanager.ResourcePathMappings {
 
 // maps a group version to the replicas path in a deployment object
 var replicasPathInDeployment = fieldmanager.ResourcePathMappings{
-	schema.GroupVersion{Group: "apps", Version: "v1beta1"}.String(): fieldpath.MakePathOrDie("spec", "replicas"),
-	schema.GroupVersion{Group: "apps", Version: "v1beta2"}.String(): fieldpath.MakePathOrDie("spec", "replicas"),
-	schema.GroupVersion{Group: "apps", Version: "v1"}.String():      fieldpath.MakePathOrDie("spec", "replicas"),
+	schema.GroupVersion{Group: "apps", Version: "v1beta1"}.String():  fieldpath.MakePathOrDie("spec", "replicas"),
+	schema.GroupVersion{Group: "apps", Version: "v1beta2"}.String():  fieldpath.MakePathOrDie("spec", "replicas"),
+	schema.GroupVersion{Group: "apps", Version: "v1"}.String():       fieldpath.MakePathOrDie("spec", "replicas"),
+	schema.GroupVersion{Group: "apps", Version: "v2alpha1"}.String(): fieldpath.MakePathOrDie("spec", "replicas"),
 }
 
 // NewStorage returns new instance of DeploymentStorage.
