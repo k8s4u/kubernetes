@@ -36,6 +36,8 @@ import (
 	fakeappsv1beta1 "k8s.io/client-go/kubernetes/typed/apps/v1beta1/fake"
 	appsv1beta2 "k8s.io/client-go/kubernetes/typed/apps/v1beta2"
 	fakeappsv1beta2 "k8s.io/client-go/kubernetes/typed/apps/v1beta2/fake"
+	appsv2alpha1 "k8s.io/client-go/kubernetes/typed/apps/v2alpha1"
+	fakeappsv2alpha1 "k8s.io/client-go/kubernetes/typed/apps/v2alpha1/fake"
 	authenticationv1 "k8s.io/client-go/kubernetes/typed/authentication/v1"
 	fakeauthenticationv1 "k8s.io/client-go/kubernetes/typed/authentication/v1/fake"
 	authenticationv1beta1 "k8s.io/client-go/kubernetes/typed/authentication/v1beta1"
@@ -195,6 +197,11 @@ func (c *Clientset) AppsV1beta1() appsv1beta1.AppsV1beta1Interface {
 // AppsV1beta2 retrieves the AppsV1beta2Client
 func (c *Clientset) AppsV1beta2() appsv1beta2.AppsV1beta2Interface {
 	return &fakeappsv1beta2.FakeAppsV1beta2{Fake: &c.Fake}
+}
+
+// AppsV2alpha1 retrieves the AppsV2alpha1Client
+func (c *Clientset) AppsV2alpha1() appsv2alpha1.AppsV2alpha1Interface {
+	return &fakeappsv2alpha1.FakeAppsV2alpha1{Fake: &c.Fake}
 }
 
 // AuthenticationV1 retrieves the AuthenticationV1Client

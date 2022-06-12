@@ -1811,6 +1811,507 @@ var schemaYAML = typed.YAMLObject(`types:
     - name: type
       type:
         scalar: string
+- name: io.k8s.api.apps.v2alpha1.ControllerRevision
+  map:
+    fields:
+    - name: apiVersion
+      type:
+        scalar: string
+    - name: data
+      type:
+        namedType: __untyped_atomic_
+      default: {}
+    - name: kind
+      type:
+        scalar: string
+    - name: metadata
+      type:
+        namedType: io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta
+      default: {}
+    - name: revision
+      type:
+        scalar: numeric
+      default: 0
+- name: io.k8s.api.apps.v2alpha1.DaemonSet
+  map:
+    fields:
+    - name: apiVersion
+      type:
+        scalar: string
+    - name: kind
+      type:
+        scalar: string
+    - name: metadata
+      type:
+        namedType: io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta
+      default: {}
+    - name: spec
+      type:
+        namedType: io.k8s.api.apps.v2alpha1.DaemonSetSpec
+      default: {}
+    - name: status
+      type:
+        namedType: io.k8s.api.apps.v2alpha1.DaemonSetStatus
+      default: {}
+- name: io.k8s.api.apps.v2alpha1.DaemonSetCondition
+  map:
+    fields:
+    - name: lastTransitionTime
+      type:
+        namedType: io.k8s.apimachinery.pkg.apis.meta.v1.Time
+      default: {}
+    - name: message
+      type:
+        scalar: string
+    - name: reason
+      type:
+        scalar: string
+    - name: status
+      type:
+        scalar: string
+      default: ""
+    - name: type
+      type:
+        scalar: string
+      default: ""
+- name: io.k8s.api.apps.v2alpha1.DaemonSetSpec
+  map:
+    fields:
+    - name: minReadySeconds
+      type:
+        scalar: numeric
+    - name: revisionHistoryLimit
+      type:
+        scalar: numeric
+    - name: selector
+      type:
+        namedType: io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector
+    - name: template
+      type:
+        namedType: io.k8s.api.core.v1.PodTemplateSpec
+      default: {}
+    - name: updateStrategy
+      type:
+        namedType: io.k8s.api.apps.v2alpha1.DaemonSetUpdateStrategy
+      default: {}
+- name: io.k8s.api.apps.v2alpha1.DaemonSetStatus
+  map:
+    fields:
+    - name: collisionCount
+      type:
+        scalar: numeric
+    - name: conditions
+      type:
+        list:
+          elementType:
+            namedType: io.k8s.api.apps.v2alpha1.DaemonSetCondition
+          elementRelationship: associative
+          keys:
+          - type
+    - name: currentNumberScheduled
+      type:
+        scalar: numeric
+      default: 0
+    - name: desiredNumberScheduled
+      type:
+        scalar: numeric
+      default: 0
+    - name: numberAvailable
+      type:
+        scalar: numeric
+    - name: numberMisscheduled
+      type:
+        scalar: numeric
+      default: 0
+    - name: numberReady
+      type:
+        scalar: numeric
+      default: 0
+    - name: numberUnavailable
+      type:
+        scalar: numeric
+    - name: observedGeneration
+      type:
+        scalar: numeric
+    - name: updatedNumberScheduled
+      type:
+        scalar: numeric
+- name: io.k8s.api.apps.v2alpha1.DaemonSetUpdateStrategy
+  map:
+    fields:
+    - name: rollingUpdate
+      type:
+        namedType: io.k8s.api.apps.v2alpha1.RollingUpdateDaemonSet
+    - name: type
+      type:
+        scalar: string
+- name: io.k8s.api.apps.v2alpha1.Deployment
+  map:
+    fields:
+    - name: apiVersion
+      type:
+        scalar: string
+    - name: kind
+      type:
+        scalar: string
+    - name: metadata
+      type:
+        namedType: io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta
+      default: {}
+    - name: spec
+      type:
+        namedType: io.k8s.api.apps.v2alpha1.DeploymentSpec
+      default: {}
+    - name: status
+      type:
+        namedType: io.k8s.api.apps.v2alpha1.DeploymentStatus
+      default: {}
+- name: io.k8s.api.apps.v2alpha1.DeploymentCondition
+  map:
+    fields:
+    - name: lastTransitionTime
+      type:
+        namedType: io.k8s.apimachinery.pkg.apis.meta.v1.Time
+      default: {}
+    - name: lastUpdateTime
+      type:
+        namedType: io.k8s.apimachinery.pkg.apis.meta.v1.Time
+      default: {}
+    - name: message
+      type:
+        scalar: string
+    - name: reason
+      type:
+        scalar: string
+    - name: status
+      type:
+        scalar: string
+      default: ""
+    - name: type
+      type:
+        scalar: string
+      default: ""
+- name: io.k8s.api.apps.v2alpha1.DeploymentSpec
+  map:
+    fields:
+    - name: minReadySeconds
+      type:
+        scalar: numeric
+    - name: paused
+      type:
+        scalar: boolean
+    - name: progressDeadlineSeconds
+      type:
+        scalar: numeric
+    - name: replicas
+      type:
+        scalar: numeric
+    - name: revisionHistoryLimit
+      type:
+        scalar: numeric
+    - name: selector
+      type:
+        namedType: io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector
+    - name: strategy
+      type:
+        namedType: io.k8s.api.apps.v2alpha1.DeploymentStrategy
+      default: {}
+    - name: template
+      type:
+        namedType: io.k8s.api.core.v1.PodTemplateSpec
+      default: {}
+- name: io.k8s.api.apps.v2alpha1.DeploymentStatus
+  map:
+    fields:
+    - name: availableReplicas
+      type:
+        scalar: numeric
+    - name: collisionCount
+      type:
+        scalar: numeric
+    - name: conditions
+      type:
+        list:
+          elementType:
+            namedType: io.k8s.api.apps.v2alpha1.DeploymentCondition
+          elementRelationship: associative
+          keys:
+          - type
+    - name: observedGeneration
+      type:
+        scalar: numeric
+    - name: readyReplicas
+      type:
+        scalar: numeric
+    - name: replicas
+      type:
+        scalar: numeric
+    - name: unavailableReplicas
+      type:
+        scalar: numeric
+    - name: updatedReplicas
+      type:
+        scalar: numeric
+- name: io.k8s.api.apps.v2alpha1.DeploymentStrategy
+  map:
+    fields:
+    - name: rollingUpdate
+      type:
+        namedType: io.k8s.api.apps.v2alpha1.RollingUpdateDeployment
+    - name: type
+      type:
+        scalar: string
+- name: io.k8s.api.apps.v2alpha1.ReplicaSet
+  map:
+    fields:
+    - name: apiVersion
+      type:
+        scalar: string
+    - name: kind
+      type:
+        scalar: string
+    - name: metadata
+      type:
+        namedType: io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta
+      default: {}
+    - name: spec
+      type:
+        namedType: io.k8s.api.apps.v2alpha1.ReplicaSetSpec
+      default: {}
+    - name: status
+      type:
+        namedType: io.k8s.api.apps.v2alpha1.ReplicaSetStatus
+      default: {}
+- name: io.k8s.api.apps.v2alpha1.ReplicaSetCondition
+  map:
+    fields:
+    - name: lastTransitionTime
+      type:
+        namedType: io.k8s.apimachinery.pkg.apis.meta.v1.Time
+      default: {}
+    - name: message
+      type:
+        scalar: string
+    - name: reason
+      type:
+        scalar: string
+    - name: status
+      type:
+        scalar: string
+      default: ""
+    - name: type
+      type:
+        scalar: string
+      default: ""
+- name: io.k8s.api.apps.v2alpha1.ReplicaSetSpec
+  map:
+    fields:
+    - name: minReadySeconds
+      type:
+        scalar: numeric
+    - name: replicas
+      type:
+        scalar: numeric
+    - name: selector
+      type:
+        namedType: io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector
+    - name: template
+      type:
+        namedType: io.k8s.api.core.v1.PodTemplateSpec
+      default: {}
+- name: io.k8s.api.apps.v2alpha1.ReplicaSetStatus
+  map:
+    fields:
+    - name: availableReplicas
+      type:
+        scalar: numeric
+    - name: conditions
+      type:
+        list:
+          elementType:
+            namedType: io.k8s.api.apps.v2alpha1.ReplicaSetCondition
+          elementRelationship: associative
+          keys:
+          - type
+    - name: fullyLabeledReplicas
+      type:
+        scalar: numeric
+    - name: observedGeneration
+      type:
+        scalar: numeric
+    - name: readyReplicas
+      type:
+        scalar: numeric
+    - name: replicas
+      type:
+        scalar: numeric
+      default: 0
+- name: io.k8s.api.apps.v2alpha1.RollingUpdateDaemonSet
+  map:
+    fields:
+    - name: maxSurge
+      type:
+        namedType: io.k8s.apimachinery.pkg.util.intstr.IntOrString
+    - name: maxUnavailable
+      type:
+        namedType: io.k8s.apimachinery.pkg.util.intstr.IntOrString
+- name: io.k8s.api.apps.v2alpha1.RollingUpdateDeployment
+  map:
+    fields:
+    - name: maxSurge
+      type:
+        namedType: io.k8s.apimachinery.pkg.util.intstr.IntOrString
+    - name: maxUnavailable
+      type:
+        namedType: io.k8s.apimachinery.pkg.util.intstr.IntOrString
+- name: io.k8s.api.apps.v2alpha1.RollingUpdateStatefulSetStrategy
+  map:
+    fields:
+    - name: maxUnavailable
+      type:
+        namedType: io.k8s.apimachinery.pkg.util.intstr.IntOrString
+    - name: partition
+      type:
+        scalar: numeric
+- name: io.k8s.api.apps.v2alpha1.StatefulSet
+  map:
+    fields:
+    - name: apiVersion
+      type:
+        scalar: string
+    - name: kind
+      type:
+        scalar: string
+    - name: metadata
+      type:
+        namedType: io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta
+      default: {}
+    - name: spec
+      type:
+        namedType: io.k8s.api.apps.v2alpha1.StatefulSetSpec
+      default: {}
+    - name: status
+      type:
+        namedType: io.k8s.api.apps.v2alpha1.StatefulSetStatus
+      default: {}
+- name: io.k8s.api.apps.v2alpha1.StatefulSetCondition
+  map:
+    fields:
+    - name: lastTransitionTime
+      type:
+        namedType: io.k8s.apimachinery.pkg.apis.meta.v1.Time
+      default: {}
+    - name: message
+      type:
+        scalar: string
+    - name: reason
+      type:
+        scalar: string
+    - name: status
+      type:
+        scalar: string
+      default: ""
+    - name: type
+      type:
+        scalar: string
+      default: ""
+- name: io.k8s.api.apps.v2alpha1.StatefulSetPersistentVolumeClaimRetentionPolicy
+  map:
+    fields:
+    - name: whenDeleted
+      type:
+        scalar: string
+    - name: whenScaled
+      type:
+        scalar: string
+- name: io.k8s.api.apps.v2alpha1.StatefulSetSpec
+  map:
+    fields:
+    - name: minReadySeconds
+      type:
+        scalar: numeric
+    - name: persistentVolumeClaimRetentionPolicy
+      type:
+        namedType: io.k8s.api.apps.v2alpha1.StatefulSetPersistentVolumeClaimRetentionPolicy
+    - name: podManagementPolicy
+      type:
+        scalar: string
+    - name: replicas
+      type:
+        scalar: numeric
+    - name: revisionHistoryLimit
+      type:
+        scalar: numeric
+    - name: selector
+      type:
+        namedType: io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector
+    - name: serviceName
+      type:
+        scalar: string
+      default: ""
+    - name: template
+      type:
+        namedType: io.k8s.api.core.v1.PodTemplateSpec
+      default: {}
+    - name: updateStrategy
+      type:
+        namedType: io.k8s.api.apps.v2alpha1.StatefulSetUpdateStrategy
+      default: {}
+    - name: volumeClaimTemplates
+      type:
+        list:
+          elementType:
+            namedType: io.k8s.api.core.v1.PersistentVolumeClaim
+          elementRelationship: atomic
+- name: io.k8s.api.apps.v2alpha1.StatefulSetStatus
+  map:
+    fields:
+    - name: availableReplicas
+      type:
+        scalar: numeric
+      default: 0
+    - name: collisionCount
+      type:
+        scalar: numeric
+    - name: conditions
+      type:
+        list:
+          elementType:
+            namedType: io.k8s.api.apps.v2alpha1.StatefulSetCondition
+          elementRelationship: associative
+          keys:
+          - type
+    - name: currentReplicas
+      type:
+        scalar: numeric
+    - name: currentRevision
+      type:
+        scalar: string
+    - name: observedGeneration
+      type:
+        scalar: numeric
+    - name: readyReplicas
+      type:
+        scalar: numeric
+    - name: replicas
+      type:
+        scalar: numeric
+      default: 0
+    - name: updateRevision
+      type:
+        scalar: string
+    - name: updatedReplicas
+      type:
+        scalar: numeric
+- name: io.k8s.api.apps.v2alpha1.StatefulSetUpdateStrategy
+  map:
+    fields:
+    - name: rollingUpdate
+      type:
+        namedType: io.k8s.api.apps.v2alpha1.RollingUpdateStatefulSetStrategy
+    - name: type
+      type:
+        scalar: string
 - name: io.k8s.api.autoscaling.v1.CrossVersionObjectReference
   map:
     fields:

@@ -22,6 +22,7 @@ import (
 	v1 "k8s.io/client-go/informers/apps/v1"
 	v1beta1 "k8s.io/client-go/informers/apps/v1beta1"
 	v1beta2 "k8s.io/client-go/informers/apps/v1beta2"
+	v2alpha1 "k8s.io/client-go/informers/apps/v2alpha1"
 	internalinterfaces "k8s.io/client-go/informers/internalinterfaces"
 )
 
@@ -33,6 +34,8 @@ type Interface interface {
 	V1beta1() v1beta1.Interface
 	// V1beta2 provides access to shared informers for resources in V1beta2.
 	V1beta2() v1beta2.Interface
+	// V2alpha1 provides access to shared informers for resources in V2alpha1.
+	V2alpha1() v2alpha1.Interface
 }
 
 type group struct {
@@ -59,4 +62,9 @@ func (g *group) V1beta1() v1beta1.Interface {
 // V1beta2 returns a new v1beta2.Interface.
 func (g *group) V1beta2() v1beta2.Interface {
 	return v1beta2.New(g.factory, g.namespace, g.tweakListOptions)
+}
+
+// V2alpha1 returns a new v2alpha1.Interface.
+func (g *group) V2alpha1() v2alpha1.Interface {
+	return v2alpha1.New(g.factory, g.namespace, g.tweakListOptions)
 }

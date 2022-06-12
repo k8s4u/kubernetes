@@ -27,6 +27,7 @@ import (
 	appsv1 "k8s.io/api/apps/v1"
 	appsv1beta1 "k8s.io/api/apps/v1beta1"
 	v1beta2 "k8s.io/api/apps/v1beta2"
+	v2alpha1 "k8s.io/api/apps/v2alpha1"
 	autoscalingv1 "k8s.io/api/autoscaling/v1"
 	v2 "k8s.io/api/autoscaling/v2"
 	v2beta1 "k8s.io/api/autoscaling/v2beta1"
@@ -135,6 +136,18 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Apps().V1beta2().ReplicaSets().Informer()}, nil
 	case v1beta2.SchemeGroupVersion.WithResource("statefulsets"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Apps().V1beta2().StatefulSets().Informer()}, nil
+
+		// Group=apps, Version=v2alpha1
+	case v2alpha1.SchemeGroupVersion.WithResource("controllerrevisions"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Apps().V2alpha1().ControllerRevisions().Informer()}, nil
+	case v2alpha1.SchemeGroupVersion.WithResource("daemonsets"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Apps().V2alpha1().DaemonSets().Informer()}, nil
+	case v2alpha1.SchemeGroupVersion.WithResource("deployments"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Apps().V2alpha1().Deployments().Informer()}, nil
+	case v2alpha1.SchemeGroupVersion.WithResource("replicasets"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Apps().V2alpha1().ReplicaSets().Informer()}, nil
+	case v2alpha1.SchemeGroupVersion.WithResource("statefulsets"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Apps().V2alpha1().StatefulSets().Informer()}, nil
 
 		// Group=autoscaling, Version=v1
 	case autoscalingv1.SchemeGroupVersion.WithResource("horizontalpodautoscalers"):

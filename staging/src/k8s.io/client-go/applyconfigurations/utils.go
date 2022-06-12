@@ -25,6 +25,7 @@ import (
 	appsv1 "k8s.io/api/apps/v1"
 	appsv1beta1 "k8s.io/api/apps/v1beta1"
 	v1beta2 "k8s.io/api/apps/v1beta2"
+	v2alpha1 "k8s.io/api/apps/v2alpha1"
 	autoscalingv1 "k8s.io/api/autoscaling/v1"
 	v2 "k8s.io/api/autoscaling/v2"
 	v2beta1 "k8s.io/api/autoscaling/v2beta1"
@@ -69,6 +70,7 @@ import (
 	applyconfigurationsappsv1 "k8s.io/client-go/applyconfigurations/apps/v1"
 	applyconfigurationsappsv1beta1 "k8s.io/client-go/applyconfigurations/apps/v1beta1"
 	appsv1beta2 "k8s.io/client-go/applyconfigurations/apps/v1beta2"
+	appsv2alpha1 "k8s.io/client-go/applyconfigurations/apps/v2alpha1"
 	applyconfigurationsautoscalingv1 "k8s.io/client-go/applyconfigurations/autoscaling/v1"
 	autoscalingv2 "k8s.io/client-go/applyconfigurations/autoscaling/v2"
 	autoscalingv2beta1 "k8s.io/client-go/applyconfigurations/autoscaling/v2beta1"
@@ -281,6 +283,56 @@ func ForKind(kind schema.GroupVersionKind) interface{} {
 		return &appsv1beta2.StatefulSetStatusApplyConfiguration{}
 	case v1beta2.SchemeGroupVersion.WithKind("StatefulSetUpdateStrategy"):
 		return &appsv1beta2.StatefulSetUpdateStrategyApplyConfiguration{}
+
+		// Group=apps, Version=v2alpha1
+	case v2alpha1.SchemeGroupVersion.WithKind("ControllerRevision"):
+		return &appsv2alpha1.ControllerRevisionApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("DaemonSet"):
+		return &appsv2alpha1.DaemonSetApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("DaemonSetCondition"):
+		return &appsv2alpha1.DaemonSetConditionApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("DaemonSetSpec"):
+		return &appsv2alpha1.DaemonSetSpecApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("DaemonSetStatus"):
+		return &appsv2alpha1.DaemonSetStatusApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("DaemonSetUpdateStrategy"):
+		return &appsv2alpha1.DaemonSetUpdateStrategyApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("Deployment"):
+		return &appsv2alpha1.DeploymentApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("DeploymentCondition"):
+		return &appsv2alpha1.DeploymentConditionApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("DeploymentSpec"):
+		return &appsv2alpha1.DeploymentSpecApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("DeploymentStatus"):
+		return &appsv2alpha1.DeploymentStatusApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("DeploymentStrategy"):
+		return &appsv2alpha1.DeploymentStrategyApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("ReplicaSet"):
+		return &appsv2alpha1.ReplicaSetApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("ReplicaSetCondition"):
+		return &appsv2alpha1.ReplicaSetConditionApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("ReplicaSetSpec"):
+		return &appsv2alpha1.ReplicaSetSpecApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("ReplicaSetStatus"):
+		return &appsv2alpha1.ReplicaSetStatusApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("RollingUpdateDaemonSet"):
+		return &appsv2alpha1.RollingUpdateDaemonSetApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("RollingUpdateDeployment"):
+		return &appsv2alpha1.RollingUpdateDeploymentApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("RollingUpdateStatefulSetStrategy"):
+		return &appsv2alpha1.RollingUpdateStatefulSetStrategyApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("StatefulSet"):
+		return &appsv2alpha1.StatefulSetApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("StatefulSetCondition"):
+		return &appsv2alpha1.StatefulSetConditionApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("StatefulSetPersistentVolumeClaimRetentionPolicy"):
+		return &appsv2alpha1.StatefulSetPersistentVolumeClaimRetentionPolicyApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("StatefulSetSpec"):
+		return &appsv2alpha1.StatefulSetSpecApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("StatefulSetStatus"):
+		return &appsv2alpha1.StatefulSetStatusApplyConfiguration{}
+	case v2alpha1.SchemeGroupVersion.WithKind("StatefulSetUpdateStrategy"):
+		return &appsv2alpha1.StatefulSetUpdateStrategyApplyConfiguration{}
 
 		// Group=autoscaling, Version=v1
 	case autoscalingv1.SchemeGroupVersion.WithKind("CrossVersionObjectReference"):
