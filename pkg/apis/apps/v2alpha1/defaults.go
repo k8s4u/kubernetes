@@ -18,6 +18,8 @@ package v2alpha1
 
 import (
 	appsv2alpha1 "k8s.io/api/apps/v2alpha1"
+	v1 "k8s.io/api/core/v1"
+	"k8s.io/apimachinery/pkg/api/resource"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/util/intstr"
 	utilfeature "k8s.io/apiserver/pkg/util/feature"
@@ -27,6 +29,16 @@ import (
 
 func addDefaultingFuncs(scheme *runtime.Scheme) error {
 	return RegisterDefaults(scheme)
+}
+
+// Generate user/group ID based on deployment name
+func generateId(name string) int64 {
+	var userid int64 = 100000
+	for _, c := range name {
+		a := int64(c)
+		userid += a
+	}
+	return userid
 }
 
 // SetDefaults_Deployment sets additional defaults compared to its counterpart
@@ -69,6 +81,70 @@ func SetDefaults_Deployment(obj *appsv2alpha1.Deployment) {
 	if obj.Spec.ProgressDeadlineSeconds == nil {
 		obj.Spec.ProgressDeadlineSeconds = new(int32)
 		*obj.Spec.ProgressDeadlineSeconds = 600
+	}
+
+	// Add default security context with all hardenings enabled unless defined separately
+	if obj.Spec.Template.Spec.SecurityContext == nil {
+		obj.Spec.Template.Spec.SecurityContext = &v1.PodSecurityContext{}
+	}
+
+	// Set RunAsNonRoot to true if it is not set.
+	if obj.Spec.Template.Spec.SecurityContext.RunAsNonRoot == nil {
+		*obj.Spec.Template.Spec.SecurityContext.RunAsNonRoot = true
+	}
+
+	// Set RunAsUser to predictable non-root value if it is not set.
+	if obj.Spec.Template.Spec.SecurityContext.RunAsUser == nil {
+		*obj.Spec.Template.Spec.SecurityContext.RunAsUser = generateId(obj.Name)
+	}
+
+	// Set RunAsGroup to predictable non-root value if it is not set.
+	if obj.Spec.Template.Spec.SecurityContext.RunAsGroup == nil {
+		*obj.Spec.Template.Spec.SecurityContext.RunAsGroup = generateId(obj.Name)
+	}
+
+	// Set FSGroup to predictable non-root value if it is not set.
+	if obj.Spec.Template.Spec.SecurityContext.FSGroup == nil {
+		*obj.Spec.Template.Spec.SecurityContext.FSGroup = generateId(obj.Name)
+	}
+
+	// Set ReadOnlyRootFilesystem to true if it is not set
+	// and in addition also mount emptyDir to /tmp with 100Mi size limit
+	tmpfsMount := false
+	for _, c := range obj.Spec.Template.Spec.Containers {
+		if c.SecurityContext.ReadOnlyRootFilesystem == nil {
+			tmpfsMount = true
+			*c.SecurityContext.ReadOnlyRootFilesystem = true
+
+			if c.VolumeMounts == nil {
+				c.VolumeMounts = []v1.VolumeMount{}
+			}
+			c.VolumeMounts[0] = v1.VolumeMount{
+				Name:      "tmpfs",
+				ReadOnly:  false,
+				MountPath: "/tmp",
+			}
+		}
+
+		// Set AllowPrivilegeEscalation to false if it is not set
+		if c.SecurityContext.AllowPrivilegeEscalation == nil {
+			*c.SecurityContext.AllowPrivilegeEscalation = false
+		}
+	}
+	if tmpfsMount {
+		if obj.Spec.Template.Spec.Volumes == nil {
+			obj.Spec.Template.Spec.Volumes = []v1.Volume{}
+		}
+		obj.Spec.Template.Spec.Volumes[0] = v1.Volume{
+			Name: "tmpfs",
+			VolumeSource: v1.VolumeSource{
+				EmptyDir: &v1.EmptyDirVolumeSource{
+					SizeLimit: &resource.Quantity{
+						Format: "100Mi",
+					},
+				},
+			},
+		}
 	}
 }
 
